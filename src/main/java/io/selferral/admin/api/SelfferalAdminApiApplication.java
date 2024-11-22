@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-public class SelfferalApiApplication {
+public class SelfferalAdminApiApplication {
 	
 	@PostConstruct
 	void startedTime() {
@@ -17,6 +17,6 @@ public class SelfferalApiApplication {
 	}
 	
 	public static void main(String[] args) {
-		SpringApplication.run(SelfferalApiApplication.class, args);
+		SpringApplication.run(SelfferalAdminApiApplication.class, args);
 	}
 }
