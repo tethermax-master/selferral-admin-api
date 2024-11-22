@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 --> 
+<configuration scan="true" scanPeriod="60 seconds">
+    <!-- log patterns -->    
+    <property name="log.pattern" value="[%-5level] [%thread] [%logger{50}] - %msg%n" />
+    <property name="log.pattern.local.short" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+    <property name="log.pattern.local.color" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    
+    <!-- Color Logs -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+
+    <!-- Console Output Settings -->
+    <appender name="NORMAL" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder> 
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="LOCAL_SHORT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder> 
+            <pattern>${log.pattern.local.short}</pattern>   
+        </encoder>
+    </appender>
+    
+    <appender name="LOCAL_COLOR" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern.local.color}</pattern>
+        </encoder>
+    </appender>
+    
+    <springProfile name="local">
+        <root level="INFO">  
+              <appender-ref ref="LOCAL_COLOR"/>    
+        </root>
+    </springProfile>
+    <springProfile name="stg">
+        <root level="INFO">  
+              <appender-ref ref="NORMAL"/>    
+        </root>
+    </springProfile>
+    <springProfile name="prod">
+        <root level="INFO">  
+              <appender-ref ref="NORMAL"/>    
+        </root>
+    </springProfile>
+</configuration>

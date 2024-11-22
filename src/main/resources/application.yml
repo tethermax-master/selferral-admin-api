@@ -1,0 +1,198 @@
+spring:
+    profiles: 
+        active: local
+    output:
+      ansi:
+        enabled: always
+---
+spring:
+  servlet : 
+    multipart:
+      max-file-size : 300MB
+      max-request-size : 300MB
+  config:
+    activate:
+      on-profile: local
+    import: 'aws-secretsmanager:prod/selferral'
+  security:
+    user:
+      password: 1
+        
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:${engine}://${host}:${port}/${dbschemas}?sslMode=DISABLED
+      username: ${id}
+      password: ${password} 
+      maximum-pool-size: 10
+      max-lifetime: 58000 
+      connection-timeout: 25000
+      data-source-properties: 
+        cachePrepStmts: true 
+        prepStmtCacheSize: 250 
+        prepStmtCacheSqlLimit: 2048 
+        useServerPrepStmts: true
+#        connection-test-query: SELECT 1
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${s3AccessKey}
+      secret-key: ${s3SecretAccessKey}
+    s3:
+      bucket: stg-private-tethermax
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    gateway:
+      uri: https://dun1rbtbqe.execute-api.ap-northeast-2.amazonaws.com/stg/get-post-preSignedUrl
+
+server:
+    port: 3333
+    servlet:
+        encoding:
+          force-response: true 
+        context-path: /api
+    error:
+      include-stacktrace: never
+                
+#logging
+logging:
+  level:
+    root: info
+    '[org.springframework.web]': debug
+    sql: off 
+    jdbc:
+      sqlonly: info
+      sqltiming: info
+      audit: off
+      resultset: off
+      connection: off
+      
+---
+
+spring:
+  servlet : 
+    multipart:
+      max-file-size : 300MB
+      max-request-size : 300MB
+  config:
+    activate:
+      on-profile: stg
+    import: 'aws-secretsmanager:prod/selferral'
+  security:
+    user:
+      password: 1
+        
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:${engine}://${host}:${port}/${dbschemas}?sslMode=DISABLED
+      username: ${id}
+      password: ${password} 
+      maximum-pool-size: 10
+      max-lifetime: 58000 
+      connection-timeout: 25000
+      data-source-properties: 
+        cachePrepStmts: true 
+        prepStmtCacheSize: 250 
+        prepStmtCacheSqlLimit: 2048 
+        useServerPrepStmts: true
+#        connection-test-query: SELECT 1
+           
+cloud:
+  aws:
+    credentials:
+      access-key: ${s3AccessKey}
+      secret-key: ${s3SecretAccessKey}
+    s3:
+      bucket: stg-private-tethermax
+    region:
+      static: ap-northeast-2
+    stack:
+     auto: false
+    gateway:
+      uri: https://dun1rbtbqe.execute-api.ap-northeast-2.amazonaws.com/stg/get-post-preSignedUrl
+      
+server:
+    port: 3333
+    servlet:
+        encoding:
+          force-response: true 
+        context-path: /api
+    error:
+      include-stacktrace: never
+                
+#logging
+logging:
+  level:
+    root: info
+    '[org.springframework.web]': debug
+#    sql: error
+    jdbc: off
+    sqltiming: debug
+    
+    
+---
+
+spring:
+  servlet : 
+    multipart:
+      max-file-size : 300MB
+      max-request-size : 300MB
+  config:
+    activate:
+      on-profile: prod
+    import: 'aws-secretsmanager:prod/selferral'
+  security:
+    user:
+      password: 1
+        
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:${engine}://${host}:${port}/${dbschemas}?sslMode=DISABLED
+      username: ${id}
+      password: ${password} 
+      maximum-pool-size: 10
+      max-lifetime: 58000 
+      connection-timeout: 25000
+      data-source-properties: 
+        cachePrepStmts: true 
+        prepStmtCacheSize: 250 
+        prepStmtCacheSqlLimit: 2048 
+        useServerPrepStmts: true
+#        connection-test-query: SELECT 1
+           
+cloud:
+  aws:
+    credentials:
+      access-key: ${s3AccessKey}
+      secret-key: ${s3SecretAccessKey}
+    s3:
+      bucket: prod-private-tethermax
+    region:
+      static: ap-northeast-2
+    stack:
+     auto: false
+    gateway:
+      uri: https://pvpgqmd1a8.execute-api.ap-northeast-2.amazonaws.com/prod/get-post-preSignedUrl
+    
+server:
+    port: 3333
+    servlet:
+        encoding:
+          force-response: true 
+        context-path: /api
+    error:
+      include-stacktrace: never
+                
+#logging
+logging:
+  level:
+    root: info
+    '[org.springframework.web]': debug
+#    sql: error
+    jdbc: off
+    sqltiming: debug
