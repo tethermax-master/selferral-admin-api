@@ -1,2 +1,2 @@
-# tethermax-app-server
-tethermax app server java source
+# selferral-admin-api-server
+selferral admin api server java source
