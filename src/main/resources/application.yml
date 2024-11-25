@@ -49,7 +49,7 @@ cloud:
       uri: https://dun1rbtbqe.execute-api.ap-northeast-2.amazonaws.com/stg/get-post-preSignedUrl
 
 server:
-    port: 3333
+    port: 8888
     servlet:
         encoding:
           force-response: true 
@@ -116,7 +116,7 @@ cloud:
       uri: https://dun1rbtbqe.execute-api.ap-northeast-2.amazonaws.com/stg/get-post-preSignedUrl
       
 server:
-    port: 3333
+    port: 8888
     servlet:
         encoding:
           force-response: true 
@@ -180,7 +180,7 @@ cloud:
       uri: https://pvpgqmd1a8.execute-api.ap-northeast-2.amazonaws.com/prod/get-post-preSignedUrl
     
 server:
-    port: 3333
+    port: 8888
     servlet:
         encoding:
           force-response: true 
