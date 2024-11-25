@@ -23,8 +23,6 @@ public class CD {
 		SERVER_TIME_STAMP(200, "S001", "서버시간 조회 성공."),
 //		SIGN_IN_SUCCESS(200, "S002", "로그인 성공"),
 		
-		// Exchange
-		UID_ENROLL_INIT_SUCCESS(200, "S100", "Uid 셀퍼럴 신청 성공."),
 		;
 		
 		private int status;
@@ -59,8 +57,5 @@ public class CD {
 	    }
 	}
     
-    public enum UidEnrollProcessResponse { 
-    	SUCCESS, PROCESSING, ALREADY_SUCCESS, NOT_FOUND_UID
-    }
     
 }	
