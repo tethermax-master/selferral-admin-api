@@ -2,26 +2,39 @@ package io.selferral.admin.api.core;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.selferral.admin.api.core.util.EnumMapperType;
+
 public class CD {
 	
 
-    public enum useYn{
-    	Y, N 
-    }
-    
-    public enum EnrollStatus {
-    	S, R, P // (승인, 거절, 진행중)
-    }
-    
-    public enum ExchangeName {
-    	BINGX, BITGET, BITMART, BYBIT, COINCATCH, DEEPCOIN, MEXC, OKX;
-    }
+    public enum MemberRole implements EnumMapperType {
+		MASTER("어드민"),
+		;
+
+		private String label;
+		
+		MemberRole(String label) { this.label = label; }
+		
+		@Override
+		public String getCode() { return name(); }
+
+		@Override
+		public String getLabel() { return label; }
+		
+	    public static String getMemberRole(String code) {
+	        for (MemberRole gubun : MemberRole.values()) {
+	            if (code.equals(gubun.getCode())) {
+	                return gubun.getLabel();
+	            }
+	        }
+	        return null;
+	    }
+	}
     
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 	public enum APIReponseCode {
 		// SIGN
-		SERVER_TIME_STAMP(200, "S001", "서버시간 조회 성공."),
-//		SIGN_IN_SUCCESS(200, "S002", "로그인 성공"),
+		SIGN_IN_SUCCESS(200, "S001", "로그인 성공"),
 		
 		;
 		
@@ -57,5 +70,60 @@ public class CD {
 	    }
 	}
     
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+	public enum ErrorCode {
+
+	    // Common
+		BAD_REQUEST(400, "E000", "잘못된 요청 입니다."),
+	    INVALID_INPUT_VALUE(400, "E001", "입력 값이 잘못 되었습니다."),
+	    METHOD_NOT_ALLOWED(405, "E002", "허용되지 않은 요청 방식 입니다."),
+	    INTERNAL_SERVER_ERROR(500, "E003", "서버에서 발생한 오류입니다. 운영자에게 신고부탁드립니다."),
+	    INVALID_TYPE_VALUE(400, "E004", "잘못된 형식의 갑을 입력하였습니다."),
+	    REQUIRED_PARAMETER_IS_MISSING(400, "E005", "필수 parameter가 없습니다.다시 확인해주세요."),
+	    
+	    // Sign
+	    INVALID_JWT_SIGNATURE(401, "E006", "잘못된 JWT 서명입니다."),
+	    INVALID_JWT_TOKEN(401, "E007", "유효하지 않은 토큰입니다."),
+	    EXPIRED_JWT_TOKEN(401, "E008", "토큰 기한 만료"),
+	    NOT_SUPPORTED_JWT_TOKEN(401, "E009", "지원하지 않는 토큰입니다."),
+	    UNAUTHORIZED(401, "E010", "권한이 없습니다. 로그인이 필요합니다."),
+	    FORBIDDEN(403, "E011", "접근 권한이 없습니다."),
+	    
+	    // Member
+	    INVALID_ID_OR_PASSWORD(400, "E021", "아이디 또는 비밀번호가 일치하지 않습니다."),
+	    NOT_REGISTERED_MEMBER(400, "E022", "가입된 회원이 아닙니다. 회원 가입을 먼저 진행해주세요."),
+	    ;
+		
+		private int status;
+		private final String code;
+	    private final String message;
+
+	    ErrorCode(final int status, final String code, final String message) {
+	        this.status = status;
+	        this.code = code;
+	        this.message = message;
+	    }
+	    
+	    public int getStatus() {
+	        return status;
+	    }
+	    
+	    public String getCode() {
+	    	return code;
+	    }
+	    
+	    public String getMessage() {
+	        return this.message;
+	    }
+	    
+	    public static String getCode(String code) {
+	        for (ErrorCode errorCode : ErrorCode.values()) {
+	            if (code.equals(errorCode.code)) {
+	                return errorCode.getMessage();
+	            }
+	        }
+	        return null;
+	    }
+	}
     
 }	
