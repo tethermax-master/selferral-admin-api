@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class DashBoardResponse {
 	private int todayRegistCount;
-	private int Last7DaysRegistCount;
-	private int accumulatedCount;
+	private int last7DaysRegistCount;
+	private int accumulatedRegistCount;
 	
 }

@@ -7,6 +7,14 @@ import io.selferral.admin.api.core.util.EnumMapperType;
 public class CD {
 	
 
+	public enum UidEnrollConfirmStatus {
+		SUCCESS, REJECT;
+	}
+
+	public enum UidEnrollStatus {
+		S, P, R;	// 완료, 대기중, 거절
+	}
+    
     public enum MemberRole implements EnumMapperType {
 		MASTER("어드민"),
 		;
@@ -35,7 +43,14 @@ public class CD {
 	public enum APIReponseCode {
 		// SIGN
 		SIGN_IN_SUCCESS(200, "S001", "로그인 성공"),
+
+		// DASHBOARD
+		GET_DASHBOARD_INFO_SUCCESS(200, "S010", "대시보드 조회 성공"),
+		UID_ENROLL_LIST_EXCEL_DOWNLOAD_SUCCESS(200, "S011", "UID 리스트 엑셀 다운로드 성공"),
 		
+		// DASHBOARD
+		GET_UID_ENROLL_LIST_SUCCESS(200, "S012", "UID 신청 내역 조회 성공"),
+		UPDATE_UID_ENROLL_SUCCESS(200, "S013", "UID 신청 상태 업데이트 성공"),
 		;
 		
 		private int status;
@@ -92,6 +107,9 @@ public class CD {
 	    // Member
 	    INVALID_ID_OR_PASSWORD(400, "E021", "아이디 또는 비밀번호가 일치하지 않습니다."),
 	    NOT_REGISTERED_MEMBER(400, "E022", "가입된 회원이 아닙니다. 회원 가입을 먼저 진행해주세요."),
+	    
+	    // UidEnroll
+	    NOT_PROCCESSING_STATUS(400, "E030", "신청 중인 상태가 아닙니다."),
 	    ;
 		
 		private int status;

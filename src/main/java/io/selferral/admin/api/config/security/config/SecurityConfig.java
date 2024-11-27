@@ -63,6 +63,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration(); 
 
+        /* TODO 도메인 나오면 수정 */
         configuration.setAllowedOrigins(List.of("http://localhost:8888" , "http://admin-dev.tethermax.io", "https://admin-dev.tethermax.io", "http://admin.tethermax.io", "https://admin.tethermax.io", "https://tethermax-admin-web-pro.vercel.app"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
