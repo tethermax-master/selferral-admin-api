@@ -19,7 +19,7 @@
 		   AND DATE_ADD(update_dt, INTERVAL 9 HOUR) <![CDATA[ >= ]]> DATE_FORMAT(DATE_ADD(DATE_SUB(NOW(), INTERVAL #{days} day), INTERVAL 9 HOUR), '%Y-%m-%d 00:00:00')
 	</select>
 	
-	<select id="getUidEnrollTotalCount" resultType="int">
+	<select id="getUidEnrollSuccessTotalCount" resultType="int">
 		SELECT 
 			COUNT(*)
 		  FROM uid_enroll
