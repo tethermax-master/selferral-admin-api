@@ -39,9 +39,8 @@ public class MasterController {
 	}
 
 	@GetMapping(path=APIPath.UID_ENROLL_LIST_EXCEL_DOWNLOAD) 
-	public APIResponse uidEnrollListExcelDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void uidEnrollListExcelDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		uidEnrollService.uidEnrollListExcelDownload(request, response);
-		return new APIResponse(HttpStatus.OK.value(), null , "S011");
 	}
 
 	@GetMapping(path=APIPath.GET_UID_ENROLL_LIST) 
