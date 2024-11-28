@@ -16,12 +16,20 @@ public class CD {
     public enum ExchangeName {
     	BINGX, BITGET, BITMART, BYBIT, COINCATCH, DEEPCOIN, MEXC, OKX;
     }
+
+    public enum DeleteYn{
+    	Y, N 
+    }
     
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 	public enum APIReponseCode {
 		// SIGN
 		SERVER_TIME_STAMP(200, "S001", "서버시간 조회 성공."),
 //		SIGN_IN_SUCCESS(200, "S002", "로그인 성공"),
+		EXCHANGE_LIST_SUCCESS(200, "S030", "거래소 목록 조회 성공."),
+		DELETE_EXCHANGE_REVIEW(200, "S031", "거래소 후기 삭제 성공."),
+		EXCHANGE_REVIEW_LIST(200, "S032", "거래소 후기 리스트 조회 성공."),
+		
 		
 		;
 		

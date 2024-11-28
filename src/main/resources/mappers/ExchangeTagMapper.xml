@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.selferral.admin.api.mapper.ExchangeTagMapper">
+	
+	<select id="getExchangeTagList" parameterType="bigInteger" resultType="string">
+		SELECT b.content 
+          FROM selferral_review_choice_tag a JOIN selferral_review_tag b ON b.tag_no = a.tag_no
+         WHERE a.review_no = #{reviewNo}
+		 ORDER BY b.priority ASC	
+	</select>
+	
+	
+</mapper>
