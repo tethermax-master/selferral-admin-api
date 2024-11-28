@@ -7,7 +7,8 @@
 		SELECT 
 			COUNT(*)
 		  FROM uid_enroll
-		 WHERE status = 'S'
+		 WHERE 1 = 1
+		   AND status = 'S'
 		   AND DATE_ADD(update_dt, INTERVAL 9 HOUR) <![CDATA[ >= ]]> DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 9 HOUR), '%Y-%m-%d 00:00:00')
 	</select>
 	
@@ -15,15 +16,17 @@
 		SELECT 
 			COUNT(*)
 		  FROM uid_enroll
-		 WHERE status = 'S'
+		 WHERE 1 = 1
+		   AND status = 'S'
 		   AND DATE_ADD(update_dt, INTERVAL 9 HOUR) <![CDATA[ >= ]]> DATE_FORMAT(DATE_ADD(DATE_SUB(NOW(), INTERVAL #{days} day), INTERVAL 9 HOUR), '%Y-%m-%d 00:00:00')
 	</select>
 	
-	<select id="getUidEnrollSuccessTotalCount" resultType="int">
+	<select id="getUidEnrollCountByStatus" resultType="int">
 		SELECT 
 			COUNT(*)
 		  FROM uid_enroll
-		 WHERE status = 'S'
+		 WHERE 1 = 1
+		   AND status = #{status}
 	</select>
 	
 	<select id="getUidListExcelDownload" resultType="io.selferral.admin.api.model.dto.UidEnrollList">
@@ -32,7 +35,8 @@
 			b.en_name AS exchangeName,
 			DATE_ADD(a.update_dt, INTERVAL 9 HOUR) AS updateDt
 		  FROM uid_enroll a JOIN exchange b ON b.exchange_no = a.exchange_no
-		 WHERE status = 'S'
+		 WHERE 1 = 1
+		   AND status = 'S'
 		 ORDER BY a.update_dt ASC
 	</select>
 	
@@ -60,7 +64,8 @@
 		SELECT
 			COUNT(*)
 		  FROM uid_enroll
-		 WHERE enroll_no = #{enrollNo}
+		 WHERE 1 = 1
+		   AND enroll_no = #{enrollNo}
 		   AND status = 'P'
 	</select>
 	

@@ -10,6 +10,7 @@ import lombok.Setter;
 public class UidEnrollListResponse {
 
 	private int totalCount;
+	private int proccessingCount;
 	private List<UidEnrollResponse>  uidEnrollList;
 
 }

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.selferral.admin.api.core.CD.ErrorCode;
+import io.selferral.admin.api.core.CD.UidEnrollStatus;
 import io.selferral.admin.api.core.exception.TetherMaxException;
 import io.selferral.admin.api.mapper.UidEnrollMapper;
 import io.selferral.admin.api.model.dto.UidEnrollList;
@@ -41,6 +42,7 @@ public class UidEnrollServiceImpl implements UidEnrollService{
 	public UidEnrollListResponse getUidEnrollList(UidEnrollListRequest req) throws Exception {
 		UidEnrollListResponse res = new UidEnrollListResponse();
 		res.setTotalCount(uidEnrollMapper.getUidEnrollListCount(req));
+		res.setProccessingCount(uidEnrollMapper.getUidEnrollCountByStatus(UidEnrollStatus.P));
 		res.setUidEnrollList(uidEnrollMapper.getUidEnrollList(req));
 		return res;
 	}

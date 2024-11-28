@@ -3,6 +3,7 @@ package io.selferral.admin.api.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.selferral.admin.api.core.CD.UidEnrollStatus;
 import io.selferral.admin.api.mapper.UidEnrollMapper;
 import io.selferral.admin.api.model.response.DashBoardResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class DashBoardServiceImpl implements DashBoardService{
 		DashBoardResponse res = new DashBoardResponse();
 		res.setTodayRegistCount(uidEnrollMapper.getUidEnrollTodayCount());
 		res.setLast7DaysRegistCount(uidEnrollMapper.getUidEnrollDaysAgoCount(6));
-		res.setAccumulatedRegistCount(uidEnrollMapper.getUidEnrollSuccessTotalCount());
+		res.setAccumulatedRegistCount(uidEnrollMapper.getUidEnrollCountByStatus(UidEnrollStatus.S));
 		return res;
 	}
 }
