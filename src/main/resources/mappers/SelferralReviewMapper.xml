@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.selferral.admin.api.mapper.SelferralReviewMapper">
+	
+	<select id="getSelferralReviewList" parameterType="io.selferral.admin.api.model.request.SelferralReivewRequest" 
+			resultType="io.selferral.admin.api.model.response.SelferralReviewResponse">
+		SELECT 
+			a.review_no,
+			b.en_name AS exchangeName,
+			a.uid,
+			a.content,
+			a.delete_yn,
+			a.create_dt,
+			if(a.delete_yn = 'Y', a.update_dt, null) AS deleteDt
+		  FROM selferral_review a JOIN exchange b ON b.exchange_no = a.exchange_no
+		 WHERE 1 = 1
+		   <if test="exchangeName != null"> 
+		   AND b.en_name = #{exchangeName}
+		   </if>
+		 ORDER BY a.create_dt DESC
+		 LIMIT #{currentPage}, #{limit}
+	</select>
+	
+	<select id="getSelferralReviewListCount" parameterType="io.selferral.admin.api.model.request.SelferralReivewRequest" 
+			resultType="int">
+		SELECT 
+			COUNT(*)
+		  FROM selferral_review a JOIN exchange b ON b.exchange_no = a.exchange_no
+		 WHERE 1 = 1
+		   AND a.delete_yn = 'N' 
+		   <if test="exchangeName != null"> 
+		   AND b.en_name = #{exchangeName}
+		   </if>
+	</select>
+	
+	<update id="deleteSelferralReview" parameterType="io.selferral.admin.api.model.entity.SelferralReview">
+		UPDATE selferral_review
+	       SET delete_yn = #{deleteYn},
+	       	   update_dt = NOW()
+	     WHERE review_no = #{reviewNo} 
+	       AND delete_yn = 'N'
+	</update>
+</mapper>

@@ -18,4 +18,12 @@ public interface APIPath {
 	public static final String GET_UID_ENROLL_LIST = "/get-uid-enroll-list";
 	// UID 신청 업데이트
 	public static final String UPDATE_UID_ENROLL = "/update-uid-enroll";
+
+	/* 셀퍼럴 후기 관련 API start */
+	// 거래소 리스트 조회
+	public static final String GET_EXCHANGE_LIST = "/get-exchange-list";
+	// 셀퍼럴 후기 리스트 조회
+	public static final String GET_SELFERRAL_REVIEW_LIST = "/get-selferral-review-list";
+	// 셀퍼럴 후기 삭제
+	public static final String DELETE_SELFERRAL_REVIEW = "/delete-selferral-review";
 }

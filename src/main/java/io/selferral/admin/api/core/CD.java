@@ -39,6 +39,14 @@ public class CD {
 	    }
 	}
     
+    public enum ExchangeName {
+    	BINGX, BITGET, BITMART, BYBIT, COINCATCH, DEEPCOIN, MEXC, OKX;
+    }
+
+    public enum DeleteYn{
+    	Y, N 
+    }
+    
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 	public enum APIReponseCode {
 		// SIGN
@@ -48,9 +56,14 @@ public class CD {
 		GET_DASHBOARD_INFO_SUCCESS(200, "S010", "대시보드 조회 성공"),
 		UID_ENROLL_LIST_EXCEL_DOWNLOAD_SUCCESS(200, "S011", "UID 리스트 엑셀 다운로드 성공"),
 		
-		// DASHBOARD
+		// UID ENROLL
 		GET_UID_ENROLL_LIST_SUCCESS(200, "S012", "UID 신청 내역 조회 성공"),
 		UPDATE_UID_ENROLL_SUCCESS(200, "S013", "UID 신청 상태 업데이트 성공"),
+		
+		// SELFERRAL REVIEW
+		GET_EXCHANGE_LIST_SUCCESS(200, "S030", "거래소 목록 조회 성공."),
+		GET_SELFERRAL_REVIEW_LIST_SUCCESS(200, "S031", "거래소 후기 리스트 조회 성공."),
+		DELETE_SELFERRAL_REVIEW_SUCCESS(200, "S032", "거래소 후기 삭제 성공."),
 		;
 		
 		private int status;
