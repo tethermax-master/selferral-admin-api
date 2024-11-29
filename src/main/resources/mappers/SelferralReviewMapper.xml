@@ -27,7 +27,6 @@
 			COUNT(*)
 		  FROM selferral_review a JOIN exchange b ON b.exchange_no = a.exchange_no
 		 WHERE 1 = 1
-		   AND a.delete_yn = 'N' 
 		   <if test="exchangeName != null"> 
 		   AND b.en_name = #{exchangeName}
 		   </if>
